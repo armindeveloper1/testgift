@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>تا روز موعود...</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⏳</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            /* حذف هاله آبی رنگ زشت در گوشی هنگام تاچ کردن سریع دکمه‌ها */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c1b, #201a3a, #162a45);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #fff;
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            z-index: 5;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px rgba(163, 112, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        /* استایل جملات تصادفی */
+        .random-msg {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            color: #e2e8f0;
+            min-height: 48px; /* جلوگیری از پرش کارت هنگام لود متن‌های کوتاه یا بلند */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            direction: ltr;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 12px;
+            min-width: 70px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .time-num {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #a370ff;
+            display: block;
+            text-shadow: 0 0 8px rgba(163, 112, 255, 0.5);
+        }
+
+        .time-label {
+            font-size: 0.8rem;
+            color: #cbd5e1;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+            height: 60px;
+            position: relative;
+            width: 100%;
+        }
+
+        .btn {
+            width: 140px; 
+            height: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.1s ease;
+        }
+
+        #yes-btn {
+            background: linear-gradient(45deg, #a370ff, #3b82f6);
+            color: white;
+            box-shadow: 0 0 15px rgba(163, 112, 255, 0.4);
+            z-index: 2;
+        }
+
+        #yes-btn:active {
+            transform: scale(0.95);
+        }
+
+        #no-btn {
+            background-color: #f43f5e;
+            color: white;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(244, 63, 94, 0.3);
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: static;
+            margin: 0;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: popup 0.8s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popup {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .moon-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: block;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), inset 0 0 20px rgba(255,255,255,0.2);
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .letter {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #e2e8f0;
+            text-align: justify;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 15px;
+            border-right: 3px solid #3b82f6;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: firework 1s ease-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes firework {
+            0% { 
+                /* استفاده از 3D برای فعال کردن کارت گرافیک گوشی */
+                transform: translate3d(0, 0, 0) scale(1); 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translate3d(var(--x), var(--y), 0) scale(0); 
+                opacity: 0; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="bg-music" src="1. Intro _ Serendipity (320).mp3" loop></audio>
+    <div class="card fade-in" id="timer-card">
+        <h1>کپسول زمان دیجیتال ⏳💜</h1>
+        <p class="random-msg" id="quote-display">در حال لود کردن حس خوب...</p>
+        
+        <div class="countdown-container">
+            <div class="time-box"><span class="time-num" id="days">00</span><span class="time-label">روز</span></div>
+            <div class="time-box"><span class="time-num" id="hours">00</span><span class="time-label">ساعت</span></div>
+            <div class="time-box"><span class="time-num" id="minutes">00</span><span class="time-label">دقیقه</span></div>
+            <div class="time-box"><span class="time-num" id="seconds">00</span><span class="time-label">ثانیه</span></div>
+        </div>
+        <p style="font-size: 1.5rem; margin-top: 15px;">🔒✨</p>
+    </div>
+    
+    <div class="card hidden" id="quiz-card">
+        <h1>هنوزم منو بیشتر از همه دوس داری؟ 💜</h1>
+        <div class="btn-container">
+            <button class="btn" id="no-btn">نهههههههه فقط جیمین!😑</button>
+            <button class="btn" id="yes-btn">آرههه، معلوهه!😍</button>
+        </div>
+    </div>
+
+    <div class="card hidden" id="surprise-card">
+        <img src="images (1).jpg" alt="ماه شب آشنایی" class="moon-img">
+        <h1>روز دوست‌دختر مبارک ماه من 🌙✨</h1>
+        <p class="letter">
+            میدونی؟ آسمون شب آشنایی ما این شکلی بود. از همون شب کل دنیای من قشنگ‌تر و پر از نور شد. مرسی که هستی... دوست دارم!
+        </p>
+    </div>
+
+    <script>
+
+        // --- ارسال اعلان ورود به تلگرام شما ---
+        // (function() {
+        //     const botToken = "8529857307:AAG6I3Pt1wyyQ2doDcvvzwCHp3mbRt3_HOs"; // توکنی که از BotFather گرفتی را اینجا بذار
+        //     const chatId = "6067386461";   // آیدی عددی خودت را اینجا بذار
+        //     const message = encodeURIComponent("ماه شما وارد سایت شد! ⏳🌕");
+
+        //     // ارسال درخواست به تلگرام به صورت کاملاً پس‌زمینه و بدون ایجاد لودینگ در سایت
+        //     fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`)
+        //     .catch(error => console.log('Telegram error:', error));
+        // })();
+
+
+
+        // --- جملات تصادفی روزانه برای رفع حوصله‌سررفتگی ---
+        const dailyMessages = [
+            "امروز بیشتر از دیروز و کمتر از فردا دوستت دارم... 💙",
+            "تایمر داره ثانیه‌ها رو می‌شماره تا بالاخره بتونم سورپرایزمو بهت نشون بدم! ✨",
+            "صبرررر کن دیگه انقدر اینجارو چکککک نکننننن😒",
+            "میدونستی چشمات قشنگ‌ترین کهکشانِ کل دنیاست؟ ⭐",
+            "به جای اینکه هی این جاروو چک کنی میتونی به من پیام بدی🙄🙄",
+            "گوشی رو بزار زمین برو به کارات برس، هی نیا تایمر رو چک کن شادان خانوم!🙄",
+            "تو همونی که با بودنش کل دنیا برام قشنگ‌تر و رنگی‌تر شده. 💙",
+            "حتی تو شلوغ‌ترین روزها هم وسط فکرمی... 💫",
+            "هر چقدرم صفحه رو رفرش کنی تایمر سریع‌تر نمیره، اینو علم ثابت کرده! 🔬😜",
+            "سرعت جلو رفتن این تایمر از سرعت آماده شدنِ تو وقتی می‌خوای بری بیرون خیلی بیشتره! 🏃‍♀️💨",
+            "تا حالا بهت گفتم چقدر قشنگ می‌خندی. 😊",
+            "امروز مواظب خودت باش، چون تو کل دنیای یک نفری! 🧸",
+            "اگر فکر کردی با جلو کشیدن ساعت گوشیت می‌تونی سیستم رو دور بزنی، باید بگم طراحی منو دست‌کم گرفتی! 😎💻",
+            "تا حالا بهت گفتم چقدر با ارزش‌ترین داراییِ منی؟ حالا دوباره گفتم که یادت نره. 🧸🔒",
+            "این صفحه توسط بهترین برنامه نویس و دوس پسر قرن برنامه نویسی شده هیچجوره نمیتونی بفهمی پشت این صفحه چیه😎",
+            "اگه دلت برام تنگ شده بهم زنگ بزن نیا اینجااا🙄😊"
+        ];
+
+        function getNextMessage() {
+            // خواندن لیست شماره جملاتِ باقی‌مانده از حافظه مرورگر
+            let remainingIndices = JSON.parse(localStorage.getItem('shownQuotes'));
+
+            // اگر بار اول است یا تمام جملات یک دور نشان داده شده‌اند، لیست را از نو پر کن
+            if (!remainingIndices || remainingIndices.length === 0) {
+                remainingIndices = Array.from({ length: dailyMessages.length }, (_, i) => i);
+            }
+
+            // انتخاب تصادفی یک شماره از لیست باقی‌مانده‌ها
+            const randomIndex = Math.floor(Math.random() * remainingIndices.length);
+            const chosenMsgIndex = remainingIndices[randomIndex];
+
+            // حذف شماره انتخاب‌شده از لیست باقی‌مانده‌ها
+            remainingIndices.splice(randomIndex, 1);
+
+            // ذخیره لیست جدید در حافظه مرورگر برای دفعات بعدی
+            localStorage.setItem('shownQuotes', JSON.stringify(remainingIndices));
+
+            // بازگرداندن متن اصلی جمله
+            return dailyMessages[chosenMsgIndex];
+        }
+
+        // نمایش نهایی جمله بدون تکرار در صفحه
+        document.getElementById("quote-display").innerText = getNextMessage();
+
+        // --- بخش منطق تایمر معکوس ---
+        const targetDate = new Date("August 1, 2025 00:00:00").getTime();
+
+        const timerInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = d < 10 ? "0" + d : d;
+            document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
+            document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
+            document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
+
+            if (difference < 0) {
+                clearInterval(timerInterval);
+                document.getElementById("timer-card").classList.add("hidden");
+                document.getElementById("quiz-card").classList.remove("hidden");
+                document.getElementById("quiz-card").classList.add("fade-in");
+            }
+        }, 1000);
+
+
+        // --- بخش منطق دکمه فراری و آتش‌بازی ---
+        const noBtn = document.getElementById('no-btn');
+        const yesBtn = document.getElementById('yes-btn');
+        const quizCard = document.getElementById('quiz-card');
+        const surpriseCard = document.getElementById('surprise-card');
+
+        function escapeButton() {
+            if(noBtn.style.position !== 'absolute') {
+                noBtn.style.position = 'absolute';
+                noBtn.style.right = 'auto';
+            }
+
+            const cardRect = quizCard.getBoundingClientRect();
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+
+            // گرفتن موقعیت فعلی دکمه (اگر قبلاً حرکت کرده باشد، در غیر این صورت صفر)
+            let currentX = parseFloat(noBtn.style.left) || (cardRect.width / 2);
+            let currentY = parseFloat(noBtn.style.top) || (cardRect.height / 2);
+
+            let newX, newY, distance;
+            let attempts = 0;
+
+            // حلقه تکرار: انقدر مختصات جدید می‌سازد تا مطمئن شود فاصله پرش از ۱۰۰ پیکسل بیشتر است
+            do {
+                newX = Math.random() * (cardRect.width - btnWidth - 40) + 20;
+                newY = Math.random() * (cardRect.height - btnHeight - 120) + 80;
+                
+                // فرمول محاسبه فاصله بین نقطه جدید و قدیم
+                distance = Math.sqrt(Math.pow(newX - currentX, 2) + Math.pow(newY - currentY, 2));
+                attempts++;
+                
+                // برای جلوگیری از قفل شدن احتمالی مرورگر، بعد از ۱۰ بار تلاش کوتاه می‌آید
+            } while (distance < 120 && attempts < 50); 
+
+            noBtn.style.left = `${newX}px`;
+            noBtn.style.top = `${newY}px`;
+        }
+
+        noBtn.addEventListener('mouseenter', escapeButton);
+        noBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            escapeButton();
+        });
+
+        yesBtn.addEventListener('click', () => {
+            document.getElementById('bg-music').play();
+            quizCard.classList.add('hidden');
+            surpriseCard.classList.remove('hidden');
+            surpriseCard.classList.add('fade-in');
+            createFireworks();
+        });
+
+        function createFireworks() {
+            const colors = ['#a370ff', '#3b82f6', '#f43f5e', '#f59e0b', '#10b981'];
+            // کاهش تعداد به ۳۵ برای روانی مطلق روی همه گوشی‌ها
+            for (let i = 0; i < 35; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                const x = (Math.random() - 0.5) * window.innerWidth + 'px';
+                const y = (Math.random() - 0.5) * window.innerHeight + 'px';
+                confetti.style.setProperty('--x', x);
+                confetti.style.setProperty('--y', y);
+                
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = Math.random() * 100 + 'vh';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 1.5 + 's';
+                
+                document.body.appendChild(confetti);
+               
+            }
+        }
+    </script>
+</body>
+</html>
